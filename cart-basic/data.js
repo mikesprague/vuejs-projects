@@ -21,13 +21,17 @@ var inventory = [{
       'id': 4,
       'price': 4.35,
       'details': '3ft cable'
+  }, {
+      'id': 13,
+      'price': 9,
+      'details': '6ft cable'
   }]
 }, {
   'name': 'Small Phone',
 
   'options': [{
       'id': 5,
-      'price': 4.35,
+      'price': 199,
       'details': 'Nokia Phone'
   }]
 }, {
