@@ -69,19 +69,17 @@
           </div>
         </div>
         <div class="col-sm-4 col-sm-offset-1 well">
-          <h2>Shopping Cart <i class="fa fa-shopping-cart"></i></h2>
-          <hr>
+          <h2><i class="fa fa-shopping-cart"></i> Shopping Cart</h2>
           <ul class="list-unstyled">
             <li class="row" v-for="item in shopping_cart">
-              <div class="col-xs-8">
+              <div class="col-xs-10">
                 <button class="btn btn-xs btn-danger" @click="removeFromCart( item )" type="button" aria-label="Remove From Cart"><i class="fa fa-times"></i></button>
-                <small>{{ item.listitem }} ({{ item.price | currency }})</small> x {{ item.quantity }}
-                <div class="btn-group btn-group-xs" role="group">
-                  <button class="btn btn-xs btn-success" @click="addOne( item )" type="button" aria-label="Add One"><i class="fa fa-arrow-up"></i></button>
-                  <button class="btn btn-xs btn-danger" @click="removeOne( item )" type="button" aria-label="Remove One"><i class="fa fa-arrow-down"></i></button>
-                </div>
+                <small>{{ item.listitem }} ({{ item.price | currency }})</small>
+                <button class="btn btn-xs btn-default" @click="removeOne( item )" type="button" aria-label="Remove One"><i class="fa fa-minus"></i></button>
+                <strong>{{ item.quantity }}</strong>
+                <button class="btn btn-xs btn-default" @click="addOne( item )" type="button" aria-label="Add One"><i class="fa fa-plus"></i></button>
               </div>
-              <div class="col-xs-4 text-right">
+              <div class="col-xs-2 text-right">
                 {{ item | subvalue | currency }}
               </div>
             </li>
