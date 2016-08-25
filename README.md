@@ -10,6 +10,14 @@ tutorial it will be noted and linked to below.
   * Notes
     * From Udemy Course: [Getting Started with Vue.js](https://www.udemy.com/getting-started-with-vuejs/)
     * Cart uses static data provded with course
+* People Directory
+  * Demo
+  * Notes
+    * Loosely based on demo from Udemy Course: [Getting Started with Vue.js](https://www.udemy.com/getting-started-with-vuejs/)
+    * Grabs basic data for several people with ability to get extended data for individual people
+    * Made using:
+      * Data from API at [https://randomuser.me/](https://randomuser.me/)
+      * [Vue-resource](https://github.com/vuejs/vue-resource) plugin
 * Subreddit Feeds
   * Demo
   * Notes
