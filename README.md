@@ -10,7 +10,7 @@ tutorial it will be noted and linked to below.
   * Notes
     * From Udemy Course: [Getting Started with Vue.js](https://www.udemy.com/getting-started-with-vuejs/)
     * Cart uses static data provded with course
-* People Directory
+* Person Lookup
   * Demo
   * Notes
     * Loosely based on demo from Udemy Course: [Getting Started with Vue.js](https://www.udemy.com/getting-started-with-vuejs/)
