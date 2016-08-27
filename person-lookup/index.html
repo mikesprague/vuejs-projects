@@ -34,10 +34,15 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container" id="people">
+    <div class="container" id="app">
       <div class="row">
         <div class="col-sm-6"><!-- list -->
-
+          <input class="form-control" placeholder="Search people..." type="text" v-model="search">
+          <ul>
+            <li v-for="person in people | filterBy search">
+              {{ person.name.first | capitalize }} {{ person.name.last | capitalize }}
+            </li>
+          </ul>
         </div>
         <div class="col-sm-6"><!-- details -->
 
@@ -58,7 +63,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
     <script>
-      var apiUrl = "https://randomuser.me/api/?seed=person-lookup&nat=us&exc=login&results=250";
+      var personLookup = new Vue({
+        el: "#app",
+        data: {
+          search: "",
+          people: null,
+          person: null,
+          apiUrl: "https://randomuser.me/api/?seed=person-lookup&nat=us&exc=login&results=250"
+        },
+        created: function() {
+          this.getPeople();
+        },
+        methods: {
+          getPeople: function() {
+            this.$http.get( this.apiUrl ).then(( response ) => {
+                this.people = response.json().results;
+            }, ( response ) => {
+                console.warn( response );
+            });
+          }
+        }
+      })
     </script>
   </body>
 </html>
