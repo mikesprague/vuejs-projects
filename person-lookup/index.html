@@ -34,9 +34,14 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container" id="">
+    <div class="container" id="people">
       <div class="row">
-        <div class="col-sm-12"></div>
+        <div class="col-sm-6"><!-- list -->
+
+        </div>
+        <div class="col-sm-6"><!-- details -->
+
+        </div>
       </div>
     </div>
 
@@ -52,5 +57,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
+    <script>
+      var apiUrl = "https://randomuser.me/api/?seed=person-lookup&nat=us&exc=login&results=250";
+    </script>
   </body>
 </html>
