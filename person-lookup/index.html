@@ -78,16 +78,16 @@
         </div>
         <div class="col-sm-6"><!-- details -->
           <div v-if="person" class="well row person-container">
-            <div class="col-xs-3">
+            <div class="col-xs-4">
               <img alt="Thumbnail" class="img-circle img-responsive person-thumbnail" :src="person.picture.large">
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-8">
               <h2>{{ person.name.first | capitalize }} {{ person.name.last  | capitalize }}</h2>
               <ul class="fa-ul">
                 <li>
                   <i class="fa-li fa fa-home"></i> {{ person.location.street | titlecase }}
                   <br>
-                  {{ person.location.city | titlecase }}, {{ person.location.state | titlecase }}
+                  {{ person.location.city | titlecase }}, {{ person.location.state | titlecase }} {{ person.location.postcode }}
                 </li>
                 <li>
                   <i class="fa-li fa fa-envelope"></i> {{ person.email }}
@@ -97,6 +97,9 @@
                 </li>
                 <li>
                   <i class="fa-li fa fa-mobile-phone"></i> {{ person.cell }}
+                </li>
+                <li>
+                  <i class="fa-li fa fa-birthday-cake"></i> {{ person.dob | dateonly }}
                 </li>
               </ul>
             </div>
@@ -118,10 +121,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
     <script>
-      Vue.filter('titlecase', function (str) {
-        return str.split(' ').map(function (item) {
-            return item.charAt(0).toUpperCase() + item.substring(1);
-        }).join(' ');
+      Vue.filter( "titlecase", function( str ) {
+        return str.split( " " ).map( function ( item ) {
+            return item.charAt( 0 ).toUpperCase() + item.substring( 1 );
+        }).join( " " );
+      });
+
+      Vue.filter( "dateonly", function ( str ) {
+        return str.split( ' ' )[0];
       });
 
       var personLookup = new Vue({
