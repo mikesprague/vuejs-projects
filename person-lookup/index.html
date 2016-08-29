@@ -72,7 +72,7 @@
               <loading></loading>
             </li>
             <li class="list-group-item" v-for="person in people | filterBy search" @click="selectPerson( person )">
-              <person :first="person.name.first" :last="person.name.last"></person>
+              <person-name :first="person.name.first" :last="person.name.last"></person-name>
             </li>
           </ul>
         </div>
@@ -82,7 +82,7 @@
               <img alt="Thumbnail" class="img-circle img-responsive person-thumbnail" :src="person.picture.large">
             </div>
             <div class="col-xs-8">
-              <h2>{{ person.name.first | capitalize }} {{ person.name.last  | capitalize }}</h2>
+              <h2><person-name :first="person.name.first" :last="person.name.last"></person-name></h2>
               <ul class="fa-ul">
                 <li>
                   <i class="fa-li fa fa-home"></i> {{ person.location.street | titlecase }}
@@ -122,7 +122,7 @@
       <p class="lead text-center">... loading data ...</p>
     </template>
 
-    <template id="person">
+    <template id="person-name">
       <span>{{ first | capitalize }} {{ last | capitalize }}</span>
     </template>
 
@@ -139,9 +139,9 @@
         return str.split( ' ' )[0];
       });
 
-      Vue.component( "person", {
+      Vue.component( "person-name", {
         props: [ "first", "last" ],
-        template: "#person"
+        template: "#person-name"
       });
 
       Vue.component( "loading", {
