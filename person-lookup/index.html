@@ -69,10 +69,10 @@
           <input class="form-control" placeholder="Filter by name..." type="text" v-model="search">
           <ul class="people-list list-group">
             <li v-if="!people" class="text-center">
-              <p class="lead text-center">Loading...</p>
+              <loading></loading>
             </li>
             <li class="list-group-item" v-for="person in people | filterBy search" @click="selectPerson( person )">
-              {{ person.name.first | capitalize }} {{ person.name.last | capitalize }}
+              <person :first="person.name.first" :last="person.name.last"></person>
             </li>
           </ul>
         </div>
@@ -118,6 +118,14 @@
       </div>
     </footer>
 
+    <template id="loading">
+      <p class="lead text-center">... loading data ...</p>
+    </template>
+
+    <template id="person">
+      <span>{{ first | capitalize }} {{ last | capitalize }}</span>
+    </template>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
     <script>
@@ -129,6 +137,15 @@
 
       Vue.filter( "dateonly", function ( str ) {
         return str.split( ' ' )[0];
+      });
+
+      Vue.component( "person", {
+        props: [ "first", "last" ],
+        template: "#person"
+      });
+
+      Vue.component( "loading", {
+        template: "#loading"
       });
 
       var personLookup = new Vue({
