@@ -46,7 +46,7 @@
       }
       .person-thumbnail {
         border: 6px solid #ebebeb;
-        margin-right: 2em;
+        margin-top: 25%;
       }
 
       .footer {
@@ -77,9 +77,29 @@
           </ul>
         </div>
         <div class="col-sm-6"><!-- details -->
-          <div v-if="person" class="well person-container">
-            <img alt="Thumbnail" class="img-circle pull-left person-thumbnail" :src="person.picture.large">
-            <h2>{{ person.name.first | capitalize }} {{ person.name.last  | capitalize }}</h2>
+          <div v-if="person" class="well row person-container">
+            <div class="col-xs-3">
+              <img alt="Thumbnail" class="img-circle img-responsive person-thumbnail" :src="person.picture.large">
+            </div>
+            <div class="col-xs-9">
+              <h2>{{ person.name.first | capitalize }} {{ person.name.last  | capitalize }}</h2>
+              <ul class="fa-ul">
+                <li>
+                  <i class="fa-li fa fa-home"></i> {{ person.location.street }}
+                  <br>
+                  {{ person.location.city | capitalize }}, {{ person.location.state | capitalize }}
+                </li>
+                <li>
+                  <i class="fa-li fa fa-envelope"></i> {{ person.email }}
+                </li>
+                <li>
+                  <i class="fa-li fa fa-phone"></i> {{ person.phone }}
+                </li>
+                <li>
+                  <i class="fa-li fa fa-mobile-phone"></i> {{ person.cell }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
