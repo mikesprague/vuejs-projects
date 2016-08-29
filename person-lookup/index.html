@@ -85,9 +85,9 @@
               <h2>{{ person.name.first | capitalize }} {{ person.name.last  | capitalize }}</h2>
               <ul class="fa-ul">
                 <li>
-                  <i class="fa-li fa fa-home"></i> {{ person.location.street }}
+                  <i class="fa-li fa fa-home"></i> {{ person.location.street | titlecase }}
                   <br>
-                  {{ person.location.city | capitalize }}, {{ person.location.state | capitalize }}
+                  {{ person.location.city | titlecase }}, {{ person.location.state | titlecase }}
                 </li>
                 <li>
                   <i class="fa-li fa fa-envelope"></i> {{ person.email }}
@@ -118,6 +118,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
     <script>
+      Vue.filter('titlecase', function (str) {
+        return str.split(' ').map(function (item) {
+            return item.charAt(0).toUpperCase() + item.substring(1);
+        }).join(' ');
+      });
+
       var personLookup = new Vue({
         el: "#app",
         data: {
