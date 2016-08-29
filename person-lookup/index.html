@@ -66,7 +66,7 @@
       <div class="row">
         <div class="col-sm-6"><!-- list -->
           <h1>All People</h1>
-          <input class="form-control" placeholder="Filter by name..." type="text" v-model="search">
+          <input class="form-control" placeholder="Filter by name..." type="text" v-model="search" v-show="people">
           <ul class="people-list list-group">
             <li v-if="!people" class="text-center">
               <loading></loading>
