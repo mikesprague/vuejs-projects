@@ -29,7 +29,7 @@
       .list-group-item {
         font-weight: lighter;
       }
-      .list-group-item i:first {
+      .task-check {
         margin-right: 10px;
       }
       .task-text {
@@ -66,7 +66,7 @@
           <hr>
           <ul v-for="todo in allTodos" class="list-group">
             <li class="list-group-item">
-              <i :class="{ 'fa fa-2x fa-square-o': !todo.completed, 'fa fa-2x fa-check-square-o text-success': todo.completed }" @click="toggleTodoStatus( todo )"></i>
+              <i :class="{ 'fa fa-fw fa-2x fa-square-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-square-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
               <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
                 {{ todo.task }}
               </span>
