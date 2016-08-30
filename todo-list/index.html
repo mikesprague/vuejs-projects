@@ -53,13 +53,13 @@
 
     <header class="container page-header">
       <h1>Simple Vue.js To-do List App</h1>
-      <p class="lead">Enter text below and hit enter to add items. Demo is stateless, items only persist for your current page visit.</p>
+      <p class="lead">Enter text below and hit enter key to add new items. Demo is stateless, items only persist for your current page view.</p>
     </header>
 
     <div class="container" id="app">
       <div class="row">
         <div class="col-sm-12">
-          <input class="form-control input-lg" placeholder="Type your task here and hit enter to add to the list..." v-model="newTodo" @keypress.enter="addTodo( todo )">
+          <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTodo" @keypress.enter="addTodo( todo )">
           <hr>
           <ul v-for="todo in allTodos" class="list-group">
             <li class="list-group-item">
