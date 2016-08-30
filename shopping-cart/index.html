@@ -9,19 +9,8 @@
     <title>Simple Vue.js shopping cart demo | &lt;/&gt; by Mike Sprague</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../shared/css/styles.css">
     <style>
-      html {
-        position: relative;
-        min-height: 100%;
-      }
-      body {
-        background-color: #fff;
-        margin-bottom: 60px;
-        font-family: -apple-system, BlinkMacSystemFont,
-          "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-          "Fira Sans", "Droid Sans", "Helvetica Neue",
-          sans-serif;
-      }
       li {
         line-height: 2em;
       }
@@ -45,12 +34,6 @@
       .text-discount {
         margin-top: 1.5em;
         font-size: 0.9em;
-      }
-      .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 60px;
       }
     </style>
     <!--[if lt IE 9]>
@@ -140,25 +123,20 @@
     </div>
 
     <footer class="footer">
-      <p class="text-muted text-center">
-        Built by <a href="https://mikesprague.me" target="_blank">Mike Sprague</a>.
-        <br>
-        Source <i class="fa fa-code"></i> available on <a href="https://github.com/mikesprague/vuejs-projects/" target="_blank"><i class="fa fa-github"></i> GitHub</a>.
-      </p>
+      <footer-content></footer-content>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="../shared/js/components.js"></script>
+    <script src="../shared/js/filters.js"></script>
     <script src="data.js"></script>
     <script>
-      Vue.filter( "subvalue", function( value ) {
-        return value.price * value.quantity;
+      var footer = new Vue({
+        el: ".footer"
       });
 
-      Vue.filter( "zeropad", function( value ) {
-        if ( value > 0 && value < 10 ) {
-          return "0" + value;
-        }
-        return value;
+      Vue.filter( "subvalue", function( value ) {
+        return value.price * value.quantity;
       });
 
       var demo = new Vue({

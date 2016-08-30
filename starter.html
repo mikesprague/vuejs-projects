@@ -9,29 +9,9 @@
     <title>Simple demo | &lt;/&gt; by Mike Sprague</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../shared/css/styles.css">
     <style>
-      * {
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      html {
-        position: relative;
-        min-height: 100%;
-      }
-      body {
-        margin-bottom: 60px;
-        font-family: -apple-system, BlinkMacSystemFont,
-          "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-          "Fira Sans", "Droid Sans", "Helvetica Neue",
-          sans-serif;
-      }
-      .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 60px;
-      }
+
     </style>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -39,22 +19,24 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container" id="">
+    <div class="container" id="app">
       <div class="row">
         <div class="col-sm-12"></div>
       </div>
     </div>
 
     <footer class="footer">
-      <div class="container">
-        <p class="text-muted text-center">
-          Built by <a href="https://mikesprague.me" target="_blank">Mike Sprague</a>.
-          <br>
-          Source <i class="fa fa-code"></i> available on <a href="https://github.com/mikesprague/vuejs-projects/" target="_blank"><i class="fa fa-github"></i> GitHub</a>.
-        </p>
-      </div>
+      <footer-content></footer-content>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
+    <script src="../shared/js/components.js"></script>
+    <script src="../shared/js/filters.js"></script>
+    <script>
+      var footer = new Vue({
+        el: ".footer"
+      });
+    </script>
   </body>
 </html>
