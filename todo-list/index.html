@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simple Vue.js to-do list demo">
+    <meta name="author" content="Mike Sprague">
+    <title>Simple Vue.js to-do list demo | &lt;/&gt; by Mike Sprague</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <style>
+      * {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        position: relative;
+        min-height: 100%;
+      }
+      body {
+        margin-bottom: 60px;
+        font-family: -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+          "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      .list-group-item {
+        font-weight: lighter;
+      }
+      .task-text {
+        cursor: pointer;
+        font-size: 32px;
+        line-height: 42px;
+      }
+      .task-completed {
+        text-decoration: line-through;
+      }
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+      }
+    </style>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <header class="container page-header">
+      <h1>Simple Vue.js To-do List App</h1>
+      <p class="lead">Enter text below and hit enter to add items. Demo is stateless, items only persist for your current page visit.</p>
+    </header>
+
+    <div class="container" id="app">
+      <div class="row">
+        <div class="col-sm-12">
+          <input class="form-control input-lg" placeholder="Type your task here and hit enter to add to the list..." v-model="newTodo" @keypress.enter="addTodo( todo )">
+          <hr>
+          <ul v-for="todo in allTodos" class="list-group">
+            <li class="list-group-item">
+              <i :class="{ 'fa fa-2x fa-square-o': !todo.completed, 'fa fa-2x fa-check-square-o text-success': todo.completed }"></i>&nbsp;&nbsp;
+              <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
+                {{ todo.task }}
+              </span>
+              <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-times-circle"></i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted text-center">
+          Built by <a href="https://mikesprague.me" target="_blank">Mike Sprague</a>.
+          <br>
+          Source <i class="fa fa-code"></i> available on <a href="https://github.com/mikesprague/vuejs-projects/" target="_blank"><i class="fa fa-github"></i> GitHub</a>.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script>
+      var todoApp = new Vue({
+        el: "#app",
+        data: {
+          newTodo: "",
+          allTodos: [{
+              task: "Do something",
+              completed: false
+            }, {
+              task: "Do something else",
+              completed: true
+          }]
+        },
+        methods: {
+          addTodo: function( item ) {
+            this.allTodos.push({
+              task: this.newTodo,
+              completed: false
+            });
+            this.newTodo = "";
+          },
+          toggleTodoStatus: function( item ) {
+            item.completed = !item.completed
+          },
+          deleteTodo: function( item ) {
+            this.allTodos.$remove( item );
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
