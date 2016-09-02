@@ -43,14 +43,8 @@
         <div class="col-sm-12">
           <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTodo" @keypress.enter="addTodo( todo )">
           <hr>
-          <ul v-for="todo in allTodos" class="list-group">
-            <li class="list-group-item">
-              <i :class="{ 'fa fa-fw fa-2x fa-square-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-square-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
-              <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
-                {{ todo.task }}
-              </span>
-              <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-times-circle"></i></button>
-            </li>
+          <ul class="list-group">
+            <task v-for="todo in allTodos" :todo="todo"></task>
           </ul>
         </div>
       </div>
@@ -60,14 +54,37 @@
       <footer-content></footer-content>
     </footer>
 
+    <template id="task">
+      <li class="list-group-item" >
+        <i :class="{ 'fa fa-fw fa-2x fa-square-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-square-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
+        <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
+          {{ todo.task }}
+        </span>
+        <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-times-circle"></i></button>
+      </li>
+    </template>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="../shared/js/components.js"></script>
     <script>
-      var footer = new Vue({
+      var Footer = new Vue({
         el: ".footer"
       });
 
-      var todoApp = new Vue({
+      Vue.component( "task", {
+        template: "#task",
+        props: ['todo'],
+        methods: {
+          toggleTodoStatus: function( item ) {
+            item.completed = !item.completed
+          },
+          deleteTodo: function() {
+            this.$remove();
+          }
+        }
+      });
+
+      var Todo = new Vue({
         el: "#app",
         data: {
           newTodo: "",
@@ -86,12 +103,6 @@
               completed: false
             });
             this.newTodo = "";
-          },
-          toggleTodoStatus: function( item ) {
-            item.completed = !item.completed
-          },
-          deleteTodo: function( item ) {
-            this.allTodos.$remove( item );
           }
         }
       });
