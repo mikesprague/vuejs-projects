@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simple Vue.js Subreddit feed explorer demo">
+    <meta name="author" content="Mike Sprague">
+    <title>Simple Vue.js Subreddit feed explorer demo | &lt;/&gt; by Mike Sprague</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../shared/css/styles.css">
+    <style>
+      .thumbnail {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+      }
+      h1 {
+        font-size: 36px;
+      }
+      h2 {
+        font-size: 24px;
+      }
+      li {
+        height: 120px;
+        font-size: 12px;
+      }
+    </style>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <header class="container page-header">
+      <h1>Simple Vue.js Subreddit feed explorer demo</h1>
+    </header>
+
+    <div class="container" id="app">
+      <div class="row">
+        <div class="col-sm-12">
+          <subreddit name="aww"></subreddit>
+          <subreddit name="space"></subreddit>
+          <subreddit name="gifs"></subreddit>
+          <subreddit name="food"></subreddit>
+          <subreddit name="comics"></subreddit>
+          <subreddit name="sports"></subreddit>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <footer-content></footer-content>
+    </footer>
+
+    <template id="subreddit">
+      <div class="col-sm-4">
+        <h2>{{ name | capitalize }}</h2>
+        <div v-if="!posts.length"><loading></loading></div>
+        <ul class="list-group">
+          <li v-for="obj in posts" class="list-group-item">
+            <post :item="obj"></post>
+          </li>
+        </ul>
+      </div>
+    </template>
+
+    <template id="post">
+      <div>
+        <a :href="item.data.url" target="_blank"><img :alt="item.data.title" class="img-thumbnail pull-left thumbnail" :src="item.data.thumbnail"></a>
+        <a :href="item.data.url" :title="item.data.title" target="_blank">
+          {{ item.data.title | truncate }}
+        </a>
+        <br>
+        <div class="btn-group btn-group-xs" role="group">
+          <a class="btn btn-xs btn-danger" href="http://reddit.com{{ item.data.permalink }}" title="Vote"><i class="fa fa-thumbs-down"></i></a>
+          <a class="btn btn-xs btn-success" href="http://reddit.com{{ item.data.permalink }}" title="Vote"><i class="fa fa-thumbs-up"></i></a>
+          <a class="btn btn-default btn-xs active" disabled="disabled">{{item.data.score}}</a>
+        </div>
+        <a class="btn btn-primary btn-xs" href="http://reddit.com{{ item.data.permalink }}" title="Go to discussion"><i class="fa fa-comments"></i> {{item.data.num_comments}}</a>
+      </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
+    <script src="../shared/js/components.js"></script>
+    <script>
+      var subreddit = Vue.component( "subreddit", {
+        template: "#subreddit",
+        props: ["name"],
+        data: function () {
+          return {
+            posts: []
+          }
+        },
+        created: function() {
+          this.$http.get( "https://www.reddit.com/r/"+ this.name +"/top.json?limit=5" )
+          .then( function( resp ) {
+            this.posts = resp.data.data.children;
+          });
+        }
+      });
+
+      var post = Vue.component( "post", {
+        template: "#post",
+        props: ["item"]
+      });
+
+      Vue.filter( "truncate", function( value ) {
+        var length = 60;
+        if ( value.length <= length ) {
+          return value;
+        } else {
+          return value.substring( 0, length ) + "...";
+        }
+      });
+
+      var footer = new Vue({
+        el: ".footer"
+      });
+
+      var app = new Vue({
+        el: "#app"
+      });
+    </script>
+  </body>
+</html>
