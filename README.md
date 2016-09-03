@@ -28,9 +28,9 @@ tutorial it will be noted and linked to below.
     * Each item can be removed with delete button on right-hand side
     * To-do list is stateless, it only remembers your items for current page view
 * Subreddit Feeds
-  * Demo
+  * [Demo](https://vuejs.mikesprague.me/subreddit-feeds/)
   * Notes:
-    * From Tutorialzine article: [Building Your First App With Vue.js](http://tutorialzine.com/2016/08/building-your-first-app-with-vue-js/)
+    * Based on Tutorialzine article: [Building Your First App With Vue.js](http://tutorialzine.com/2016/08/building-your-first-app-with-vue-js/)
     * Grabs content from predetermined list of subreddits on Reddit
     * No searching or filtering at this time
     * Makes use of [Vue-resource](https://github.com/vuejs/vue-resource) plugin
