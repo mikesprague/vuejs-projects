@@ -34,6 +34,13 @@ tutorial it will be noted and linked to below.
     * Grabs content from predetermined list of subreddits on Reddit
     * No searching or filtering at this time
     * Makes use of [Vue-resource](https://github.com/vuejs/vue-resource) plugin
+* Random Design Quotes
+  * [Demo](https://vuejs.mikesprague.me/design-quotes/)
+  * Notes:
+    * Very barebones random desing quote generator
+    * Truncates quote in Tweet content if necessary
+    * Uses API at [https://quotesondesign.com/api-v4-0/](https://quotesondesign.com/api-v4-0/)
+    * Makes use of [Vue-resource](https://github.com/vuejs/vue-resource) plugin
 * Weather App
   * Demo
   * Notes:
