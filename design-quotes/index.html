@@ -93,15 +93,20 @@
               return String.fromCharCode( dec );
             });
           },
-          sendTweet: function() {
-            var quoteText = this.quote.replace( "<p>", "" ).replace( "</p>", "" );
+          prepareTweet: function() {
+            var pattern1 = /<p>/gi;
+            var pattern2 = /<\/p>/gi;
+            var quoteText = this.quote.replace( pattern1, "" ).replace( pattern2, "" );
             if ( quoteText.length >= 100 ) {
               quoteText = quoteText.substring( 0, 100 ) + "...";
             }
             quoteText = this.decodeHtmlEntities( quoteText );
             quoteAuthor = this.decodeHtmlEntities( this.author );
             quoteText += encodeURI( " - " + quoteAuthor + "\n" + this.url );
-            var tweetUrl = this.tweetUrlPrefix + quoteText;
+            return quoteText;
+          },
+          sendTweet: function() {
+            var tweetUrl = this.tweetUrlPrefix + this.prepareTweet();
             window.open( tweetUrl );
           },
           resetData: function() {
