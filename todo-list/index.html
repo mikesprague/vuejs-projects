@@ -94,11 +94,13 @@
             this.tasks.$remove( task );
           },
           addTodo: function() {
-            this.tasks.push({
-              task: this.newTodo,
-              completed: false
-            });
-            this.newTodo = "";
+            if ( this.newTodo.length ) {
+              this.tasks.push({
+                task: this.newTodo,
+                completed: false
+              });
+              this.newTodo = "";
+            }
           },
           isComplete: function( task ) {
             return task.completed;
