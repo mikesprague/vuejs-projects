@@ -41,11 +41,7 @@
     <div class="container" id="app">
       <div class="row">
         <div class="col-sm-12">
-          <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTodo" @keypress.enter="addTodo( todo )">
-          <hr>
-          <ul class="list-group">
-            <task v-for="todo in allTodos" :todo="todo"></task>
-          </ul>
+          <todo-list :tasks="allTodos"></todo-list>
         </div>
       </div>
     </div>
@@ -54,40 +50,69 @@
       <footer-content></footer-content>
     </footer>
 
-    <template id="task">
-      <li class="list-group-item" >
-        <i :class="{ 'fa fa-fw fa-2x fa-square-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-square-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
-        <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
-          {{ todo.task }}
-        </span>
-        <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-times-circle"></i></button>
-      </li>
+    <template id="todo-list-template">
+      <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTodo" @keypress.enter="addTodo( todo )">
+      <hr>
+      <span v-show="!remainingTasks">No </span>Tasks Remaining<span v-else>: {{ remainingTasks }}</span>
+      <hr>
+      <ul class="list-group">
+        <li class="list-group-item" v-for="todo in tasks" todo="todo">
+          <i :class="{ 'fa fa-fw fa-2x fa-square-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-square-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
+          <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
+            {{ todo.task }}
+          </span>
+          <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-times-circle"></i></button>
+        </li>
+      </ul>
     </template>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="../shared/js/components.js"></script>
     <script>
-      var Footer = new Vue({
+      var footer = new Vue({
         el: ".footer"
       });
 
-      Vue.component( "task", {
-        template: "#task",
-        props: ['todo'],
+      Vue.component( "todo-list", {
+        template: "#todo-list-template",
+        props: ['tasks'],
+        data: function() {
+          return {
+            newTodo: ""
+          }
+        },
         methods: {
-          toggleTodoStatus: function( item ) {
-            item.completed = !item.completed
+          toggleTodoStatus: function( task ) {
+            task.completed = !task.completed
           },
-          deleteTodo: function() {
-            this.$remove();
+          deleteTodo: function( task ) {
+            this.tasks.$remove( task );
+          },
+          addTodo: function() {
+            this.tasks.push({
+              task: this.newTodo,
+              completed: false
+            });
+            this.newTodo = "";
+          },
+          isComplete: function( task ) {
+            return task.completed;
+          },
+          notComplte: function( task ) {
+            return !this.isComplete( task );
+          }
+        },
+        computed: {
+          remainingTasks: function() {
+            var app = this;
+            return this.tasks.filter( this.notComplte).length;
           }
         }
       });
 
-      var Todo = new Vue({
+      var app = new Vue({
         el: "#app",
         data: {
-          newTodo: "",
           allTodos: [{
               task: "Do something",
               completed: false
@@ -95,15 +120,6 @@
               task: "Do something else",
               completed: true
           }]
-        },
-        methods: {
-          addTodo: function( item ) {
-            this.allTodos.push({
-              task: this.newTodo,
-              completed: false
-            });
-            this.newTodo = "";
-          }
         }
       });
     </script>
