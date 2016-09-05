@@ -53,7 +53,12 @@
     <template id="todo-list-template">
       <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTodo" @keypress.enter="addTodo( todo )">
       <hr>
-      <span v-show="!remainingTasks">No </span>Tasks Remaining<span v-else>: {{ remainingTasks }}</span>
+      <i class="fa fa-fw fa-bar-chart"></i>
+      <span v-show="!remainingTasks && completedTasks">No Tasks Remaining</span>
+      <span v-show="remainingTasks">{{ remainingTasks }} {{ remainingTasks | pluralize "Task" }} Remaining</span>
+      <span v-show="totalTasks > 1 && totalTasks > remainingTasks"> of {{ totalTasks }} Total {{ totalTasks | pluralize "Task" }}</span>
+      <span v-show="!remainingTasks && !completedTasks">No Tasks in List</span>
+      <span v-show="completedTasks"> | <a class="text-danger" href="#" @click.prevent="clearCompleted"><i class="fa fa-fw fa-times"></i>Remove Completed Tasks from List</a></span>
       <hr>
       <ul class="list-group">
         <li class="list-group-item" v-for="todo in tasks" todo="todo">
@@ -61,7 +66,7 @@
           <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
             {{ todo.task }}
           </span>
-          <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-times-circle"></i></button>
+          <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-minus-circle"></i></button>
         </li>
       </ul>
     </template>
@@ -98,14 +103,22 @@
           isComplete: function( task ) {
             return task.completed;
           },
-          notComplte: function( task ) {
+          notComplete: function( task ) {
             return !this.isComplete( task );
+          },
+          clearCompleted: function() {
+            this.tasks = this.tasks.filter( this.notComplete );
           }
         },
         computed: {
+          completedTasks: function() {
+            return this.tasks.filter( this.isComplete).length;
+          },
           remainingTasks: function() {
-            var app = this;
-            return this.tasks.filter( this.notComplte).length;
+            return this.tasks.filter( this.notComplete).length;
+          },
+          totalTasks: function() {
+            return this.tasks.length;
           }
         }
       });
