@@ -35,7 +35,11 @@
 
     <header class="container page-header">
       <h1>Simple Vue.js To-do List App</h1>
-      <p class="lead">Enter text below and hit enter key to add new items. Demo is stateless, items only persist for your current page view.</p>
+      <p class="lead">
+        Type text below and hit enter key to add new tasks.
+        <br>
+        <small> Demo uses local storage, items will persist between visits unless  browser cache is cleared.</small>
+      </p>
     </header>
 
     <div class="container" id="app">
@@ -58,7 +62,8 @@
       <span v-show="remainingTasks">{{ remainingTasks }} {{ remainingTasks | pluralize "Task" }} Remaining</span>
       <span v-show="totalTasks > 1 && totalTasks > remainingTasks"> of {{ totalTasks }} Total {{ totalTasks | pluralize "Task" }}</span>
       <span v-show="!remainingTasks && !completedTasks">No Tasks in List</span>
-      <span v-show="completedTasks"> | <a class="text-danger" href="#" @click.prevent="clearCompleted"><i class="fa fa-fw fa-times"></i>Remove Completed Tasks from List</a></span>
+      <span v-show="completedTasks"> | <a class="text-warning" href="#" @click.prevent="clearCompleted"><i class="fa fa-fw fa-times"></i>Remove Completed Tasks from List</a></span>
+      <a class="text-danger pull-right" href="#" @click.prevent="resetApp">Reset Application with Default Data<i class="fa fa-fw fa-refresh"></i></a>
       <hr>
       <ul class="list-group">
         <li class="list-group-item" v-for="todo in tasks" todo="todo">
@@ -86,12 +91,21 @@
             newTodo: ""
           }
         },
+        created: function() {
+          if ( localStorage.todoData ) {
+            this.tasks = this.getData( "todoData" );
+          } else {
+            this.initApp();
+          }
+        },
         methods: {
           toggleTodoStatus: function( task ) {
             task.completed = !task.completed
+            this.setData( "todoData", this.tasks );
           },
           deleteTodo: function( task ) {
             this.tasks.$remove( task );
+            this.setData( "todoData", this.tasks );
           },
           addTodo: function() {
             if ( this.newTodo.length ) {
@@ -100,6 +114,7 @@
                 completed: false
               });
               this.newTodo = "";
+              this.setData( "todoData", this.tasks );
             }
           },
           isComplete: function( task ) {
@@ -110,17 +125,41 @@
           },
           clearCompleted: function() {
             this.tasks = this.tasks.filter( this.notComplete );
+            this.setData( "todoData", this.tasks );
+          },
+          setData: function( key, data ) {
+            var todoData = JSON.stringify( data );
+            localStorage.setItem( key, todoData );
+          },
+          getData: function( key ) {
+            var todoData = localStorage.getItem( key );
+            return JSON.parse( todoData );
+          },
+          resetApp: function() {
+            this.tasks = this.getData( "originalData" );
+            this.initApp();
+          },
+          initApp: function() {
+            localStorage.clear();
+            this.setData( "todoData", this.tasks );
+            this.setData( "originalData", this.tasks );
           }
         },
         computed: {
           completedTasks: function() {
-            return this.tasks.filter( this.isComplete).length;
+            if ( this.tasks ) {
+              return this.tasks.filter( this.isComplete).length;
+            }
           },
           remainingTasks: function() {
-            return this.tasks.filter( this.notComplete).length;
+            if ( this.tasks ) {
+              return this.tasks.filter( this.notComplete).length;
+            }
           },
           totalTasks: function() {
-            return this.tasks.length;
+            if ( this.tasks ) {
+              return this.tasks.length;
+            }
           }
         }
       });
