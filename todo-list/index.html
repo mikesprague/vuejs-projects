@@ -38,7 +38,7 @@
       <p class="lead">
         Type text below and hit enter key to add new tasks.
         <br>
-        <small> Demo uses local storage, items will persist between visits unless  browser cache is cleared.</small>
+        <small> Demo uses browser's local storage - task list will persist between visits unless browser's cache is cleared.</small>
       </p>
     </header>
 
@@ -55,7 +55,7 @@
     </footer>
 
     <template id="todo-list-template">
-      <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTodo" @keypress.enter="addTodo( todo )">
+      <input class="form-control input-lg" placeholder="What do you need to do?" v-model="newTask" @keypress.enter="addTodo( todo )">
       <hr>
       <i class="fa fa-fw fa-bar-chart"></i>
       <span v-show="!remainingTasks && completedTasks">No Tasks Remaining</span>
@@ -67,7 +67,7 @@
       <hr>
       <ul class="list-group">
         <li class="list-group-item" v-for="todo in tasks" todo="todo">
-          <i :class="{ 'fa fa-fw fa-2x fa-square-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-square-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
+          <i :class="{ 'fa fa-fw fa-2x fa-circle-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-circle-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
           <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
             {{ todo.task }}
           </span>
@@ -88,7 +88,8 @@
         props: ['tasks'],
         data: function() {
           return {
-            newTodo: ""
+            newTask: "",
+            taskPriority: 2
           }
         },
         created: function() {
@@ -108,12 +109,13 @@
             this.setData( "todoData", this.tasks );
           },
           addTodo: function() {
-            if ( this.newTodo.length ) {
+            if ( this.newTask.length ) {
               this.tasks.push({
-                task: this.newTodo,
+                task: this.newTask,
+                priority: this.taskPriority,
                 completed: false
               });
-              this.newTodo = "";
+              this.newTask = "";
               this.setData( "todoData", this.tasks );
             }
           },
@@ -169,9 +171,11 @@
         data: {
           allTodos: [{
               task: "Do something",
+              priority: 2,
               completed: false
             }, {
               task: "Do something else",
+              priority: 1,
               completed: true
           }]
         }
