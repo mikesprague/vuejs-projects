@@ -45,7 +45,7 @@
     <header class="container page-header">
       <h1>Simple Vue.js To-do List App</h1>
       <p class="lead">
-        Type text below and hit enter key to add new tasks.
+        Type text below and hit enter key to add new tasks. Click priority label on task to change it.
         <br>
         <small> Demo uses browser's local storage - task list will persist between visits unless browser's cache is cleared.</small>
       </p>
@@ -87,9 +87,9 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <span @click="togglePriority( todo, 1 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 1 , 'label label-info priority-label': todo.priority === 1 }">Low Priority</span>
-              <span @click="togglePriority( todo, 2 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 2 , 'label label-primary priority-label': todo.priority === 2 }">Normal Priority</span>
-              <span @click="togglePriority( todo, 3 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 3 , 'label label-danger priority-label': todo.priority === 3 }">High Priority</span>
+              <span @click="togglePriority( todo, 3 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 3 , 'label label-info priority-label': todo.priority === 3 }">Low Priority</span>
+              <span @click="togglePriority( todo, 2 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 2 , 'label label-primary priority-label': todo.priority === 2 }">Normal</span>
+              <span @click="togglePriority( todo, 1 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 1 , 'label label-danger priority-label': todo.priority === 1 }">High Priority</span>
             </div>
           </div>
         </li>
@@ -109,7 +109,7 @@
         data: function() {
           return {
             newTask: "",
-            taskPriority: 2
+            taskPriority: 2 // 1: high, 2: normal. 3: low
           }
         },
         created: function() {
