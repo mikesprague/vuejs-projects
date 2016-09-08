@@ -87,9 +87,9 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <span class="label label-default priority-label inactive">Low Priority</span>
-              <span class="label label-primary priority-label">Normal Priority</span>
-              <span class="label label-default priority-label inactive">High Priority</span>
+              <span @click="togglePriority( todo, 1 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 1 , 'label label-info priority-label': todo.priority === 1 }">Low Priority</span>
+              <span @click="togglePriority( todo, 2 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 2 , 'label label-primary priority-label': todo.priority === 2 }">Normal Priority</span>
+              <span @click="togglePriority( todo, 3 )" :class="{ 'label label-default priority-label inactive': todo.priority !== 3 , 'label label-danger priority-label': todo.priority === 3 }">High Priority</span>
             </div>
           </div>
         </li>
@@ -120,6 +120,10 @@
           }
         },
         methods: {
+          togglePriority: function( task, priority ) {
+            task.priority = priority;
+            this.setData( "todoData", this.tasks );
+          },
           toggleTodoStatus: function( task ) {
             task.completed = !task.completed
             this.setData( "todoData", this.tasks );
