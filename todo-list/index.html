@@ -25,6 +25,15 @@
       .task-completed {
         text-decoration: line-through;
       }
+      .priority-label:nth-of-type(1) {
+        margin-left: 54px;
+      }
+      .priority-label {
+        cursor: pointer;
+      }
+      .priority-label.inactive {
+        color: #777;
+      }
     </style>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -67,11 +76,22 @@
       <hr>
       <ul class="list-group">
         <li class="list-group-item" v-for="todo in tasks" todo="todo">
-          <i :class="{ 'fa fa-fw fa-2x fa-circle-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-circle-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
-          <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
-            {{ todo.task }}
-          </span>
-          <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-minus-circle"></i></button>
+          <div class="row">
+            <div class="col-sm-12">
+              <i :class="{ 'fa fa-fw fa-2x fa-circle-o task-check': !todo.completed, 'fa fa-fw fa-2x fa-check-circle-o text-success task-check': todo.completed }" @click="toggleTodoStatus( todo )"></i>
+              <span :class="{ 'task-text': !todo.completed, 'task-text task-completed text-success': todo.completed }" @click="toggleTodoStatus( todo )">
+                {{ todo.task }}
+              </span>
+              <button class="btn btn-danger btn-sm pull-right" @click="deleteTodo( todo )"><i class="fa fa-2x fa-minus-circle"></i></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <span class="label label-default priority-label inactive">Low Priority</span>
+              <span class="label label-primary priority-label">Normal Priority</span>
+              <span class="label label-default priority-label inactive">High Priority</span>
+            </div>
+          </div>
         </li>
       </ul>
     </template>
