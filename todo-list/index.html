@@ -72,7 +72,7 @@
       <span v-show="totalTasks > 1 && totalTasks > remainingTasks"> of {{ totalTasks }} Total {{ totalTasks | pluralize "Task" }}</span>
       <span v-show="!remainingTasks && !completedTasks">No Tasks in List</span>
       <span v-show="completedTasks"> | <a class="text-warning" href="#" @click.prevent="clearCompleted"><i class="fa fa-fw fa-times"></i>Remove Completed Tasks from List</a></span>
-      <a class="text-danger pull-right" href="#" @click.prevent="resetApp">Reset Application with Default Data<i class="fa fa-fw fa-refresh"></i></a>
+      <a class="text-danger pull-right" href="#" @click.prevent="resetApp">Reset to Default Demo Data<i class="fa fa-fw fa-refresh"></i></a>
       <hr>
       <ul class="list-group">
         <li class="list-group-item" v-for="todo in tasks" todo="todo">
