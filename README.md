@@ -19,14 +19,16 @@ tutorial it will be noted and linked to below.
       * Data from API at [https://randomuser.me/](https://randomuser.me/)
       * [Vue-resource](https://github.com/vuejs/vue-resource) plugin
 * To-Do List
-  * [Demo](https://vuejs.mikesprague.me/todo-list/)
+  * [Demo](https://todo-list.mikesprague.me)
   * Notes:
     * Very simple to-do list app
     * Starts with 2 example items
     * Enter text and hit enter key to add new items
     * Click on items to toggle completed status
     * Each item can be removed with delete button on right-hand side
-    * To-do list is stateless, it only remembers your items for current page view
+    * Click on priority label to change task priority
+    * To-do list uses local storage, items persist unless browser cache is cleared
+    * Moved hosting of this app to [Firebase](https://firebase.google.com) to prepare for new features that will be added
 * Subreddit Feeds
   * [Demo](https://vuejs.mikesprague.me/subreddit-feeds/)
   * Notes:
