@@ -4,3 +4,6 @@
 [submodule "person-lookup"]
 	path = person-lookup
 	url = git@github.com:mikesprague/vuejs-person-lookup.git
+[submodule "shopping-cart"]
+	path = shopping-cart
+	url = git@github.com:mikesprague/vuejs-shopping-cart.git
