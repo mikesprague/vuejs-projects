@@ -7,3 +7,6 @@
 [submodule "shopping-cart"]
 	path = shopping-cart
 	url = git@github.com:mikesprague/vuejs-shopping-cart.git
+[submodule "subreddit-feeds"]
+	path = subreddit-feeds
+	url = git@github.com:mikesprague/vuejs-subreddit-feeds.git
