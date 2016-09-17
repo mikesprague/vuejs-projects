@@ -1,0 +1,3 @@
+[submodule "design-quotes"]
+	path = design-quotes
+	url = git@github.com:mikesprague/vuejs-design-quotes.git
