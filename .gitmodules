@@ -1,3 +1,6 @@
 [submodule "design-quotes"]
 	path = design-quotes
 	url = git@github.com:mikesprague/vuejs-design-quotes.git
+[submodule "person-lookup"]
+	path = person-lookup
+	url = git@github.com:mikesprague/vuejs-person-lookup.git
