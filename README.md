@@ -19,6 +19,7 @@ tutorial it will be noted and linked to below.
       * Data from API at [https://randomuser.me/](https://randomuser.me/)
       * [Vue-resource](https://github.com/vuejs/vue-resource) plugin
 * To-Do List
+  * [![Build Status](https://travis-ci.org/mikesprague/vuejs-todo-list.svg?branch=master)](https://travis-ci.org/mikesprague/vuejs-todo-list)
   * [Demo](https://todo-list.mikesprague.me)
   * Notes:
     * Very simple to-do list app
