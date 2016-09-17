@@ -10,3 +10,6 @@
 [submodule "subreddit-feeds"]
 	path = subreddit-feeds
 	url = git@github.com:mikesprague/vuejs-subreddit-feeds.git
+[submodule "todo-list"]
+	path = todo-list
+	url = git@github.com:mikesprague/vuejs-todo-list.git
