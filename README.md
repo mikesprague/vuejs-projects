@@ -20,7 +20,7 @@ tutorial it will be noted and linked to below.
       * [Vue-resource](https://github.com/vuejs/vue-resource) plugin
 * To-Do List
   * [![Build Status](https://travis-ci.org/mikesprague/vuejs-todo-list.svg?branch=master)](https://travis-ci.org/mikesprague/vuejs-todo-list)
-  * [Demo](https://todo-list.mikesprague.me)
+  * [Demo](https://todo-list.mikesprague.me) | [Source](https://github.com/mikesprague/vuejs-todo-list)
   * Notes:
     * Very simple to-do list app
     * Starts with 2 example items
