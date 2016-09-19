@@ -1,15 +1,15 @@
 [submodule "design-quotes"]
 	path = design-quotes
-	url = git@github.com:mikesprague/vuejs-design-quotes.git
+	url = https://github.com/mikesprague/vuejs-design-quotes.git
 [submodule "person-lookup"]
 	path = person-lookup
-	url = git@github.com:mikesprague/vuejs-person-lookup.git
+	url = https://github.com/mikesprague/vuejs-person-lookup.git
 [submodule "shopping-cart"]
 	path = shopping-cart
-	url = git@github.com:mikesprague/vuejs-shopping-cart.git
+	url = https://github.com/mikesprague/vuejs-shopping-cart.git
 [submodule "subreddit-feeds"]
 	path = subreddit-feeds
-	url = git@github.com:mikesprague/vuejs-subreddit-feeds.git
+	url = https://github.com/mikesprague/vuejs-subreddit-feeds.git
 [submodule "todo-list"]
 	path = todo-list
-	url = git@github.com:mikesprague/vuejs-todo-list.git
+	url = https://github.com/mikesprague/vuejs-todo-list.git
