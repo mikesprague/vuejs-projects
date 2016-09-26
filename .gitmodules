@@ -13,3 +13,6 @@
 [submodule "todo-list"]
 	path = todo-list
 	url = https://github.com/mikesprague/vuejs-todo-list.git
+[submodule "calculator"]
+	path = calculator
+	url = https://github.com/mikesprague/vuejs-calculator.git
