@@ -1,9 +1,9 @@
 Vue.component( "loading", {
-  template: '<p class="lead text-center">... loading data ...</p>'
+  template: '<p class="lead text-center" v-once>... loading data ...</p>'
 });
 
 Vue.component( "footer-content", {
-  template: '<div class="container"> \
+  template: '<div class="container" v-once> \
       <p class="text-muted text-center"> \
         Built by <a href="https://mikesprague.me" target="_blank">Mike Sprague</a>. \
         <br> \
