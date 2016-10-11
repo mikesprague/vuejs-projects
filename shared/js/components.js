@@ -1,5 +1,5 @@
 Vue.component( "loading", {
-  template: '<p class="lead text-center" v-once>... loading data ...</p>'
+  template: '<p class="lead text-center" v-once>loading data <span class="loading dots2"></span></p>'
 });
 
 Vue.component( "footer-content", {
