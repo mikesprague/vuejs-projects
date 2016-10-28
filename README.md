@@ -28,6 +28,7 @@ tutorial it will be noted and linked to below.
     * Click on items to toggle completed status
     * Each item can be removed with delete button on right-hand side
     * Click on priority label to change task priority
+    * Tasks auto-sort by priority and when they were created (highest priority and newest tasks first)
     * To-do list uses local storage, items persist unless browser cache is cleared
     * Moved hosting of this app to [Firebase](https://firebase.google.com) to prepare for new features that will be added
 * Subreddit Feeds
